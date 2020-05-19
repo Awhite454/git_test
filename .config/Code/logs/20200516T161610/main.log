@@ -1,0 +1,10 @@
+[2020-05-16 16:16:10.151] [main] [error] SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+    at u.loadAsync (/usr/share/code/resources/app/out/vs/code/electron-main/main.js:351:770)
+    at async u.init (/usr/share/code/resources/app/out/vs/code/electron-main/main.js:351:403)
+    at async Promise.all (index 2)
+    at async /usr/share/code/resources/app/out/vs/code/electron-main/main.js:555:967
+    at async Object.startup (/usr/share/code/resources/app/out/vs/code/electron-main/main.js:555:835)
+[2020-05-16 16:16:10.324] [main] [info] update#setState idle
+[2020-05-16 16:16:40.343] [main] [info] update#setState checking for updates
+[2020-05-16 16:16:40.454] [main] [info] update#setState available for download

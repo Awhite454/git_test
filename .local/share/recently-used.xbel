@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbel version="1.0"
+      xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks"
+      xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info"
+>
+  <bookmark href="file:///tmp/mozilla_alec100/code_1.43.2-1585036376_amd64.deb" added="2020-04-02T14:58:32Z" modified="2020-04-04T02:30:57Z" visited="2020-04-02T14:58:32Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/vnd.debian.binary-package"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2020-04-04T02:30:57Z" count="3"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///" added="2020-04-07T15:47:28Z" modified="2020-05-16T20:13:51Z" visited="2020-04-07T15:48:06Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="inode/directory"/>
+        <bookmark:groups>
+          <bookmark:group>baobab</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="baobab" exec="&apos;baobab %u&apos;" modified="2020-05-16T20:13:51Z" count="4"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/alec10/readme.md" added="2020-05-16T20:17:37Z" modified="2020-05-16T20:17:37Z" visited="2020-05-16T20:17:38.226702Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:applications>
+          <bookmark:application name="code" exec="&apos;code %u&apos;" modified="2020-05-16T20:17:37Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+</xbel>

@@ -1,0 +1,649 @@
+<div id="chapter-basics" data-tralics-id="cid1" class="chapter" data-number="1" data-chapter="basics"><h1><a href="basics_fragment.html#chapter-basics" class="heading hyperref"><span class="number">Chapter 1 </span>Basics and Navigation</a></h1>
+<p>It’s important to have a firm grasp on the basics of how to use the Unix (or Linux) command line.<span class="intersentencespace"></span> This includes navigating around directories, copying files, creating files, etc.</p>
+<p>For the more experienced developer, this chapter may be common knowledge to you.<span class="intersentencespace"></span> If that’s the case, you can skip it, although you might pick up one or two little things you didn’t already know.</p>
+<p>For newer developers, this chapter contains information that will become muscle memory after a while.<span class="intersentencespace"></span> You <em>must</em> know everything in this chapter just to be able to do the most basic of things.</p>
+<p>The rest of this book will assume you understand what is in this chapter.</p>
+</div><div id="cid2" data-tralics-id="cid2" class="section" data-number="1.1"><h2><a href="basics_fragment.html#cid2" class="heading hyperref"><span class="number">1.1 </span>Home Directory (<code>~</code>)</a></h2>
+<p>On Unix and Linux systems, every user has a “home” directory.<span class="intersentencespace"></span> This directory is yours and yours alone.<span class="intersentencespace"></span> The location of your home directory varies depending on which operating system you’re on.<span class="intersentencespace"></span> For example, on Mac OS X it’s <code>/Users/&lt;username&gt;</code>, but on Ubuntu systems, it’s <code>/home/&lt;username&gt;</code>.</p>
+<p>Finding your home directory is incredibly easy.<span class="intersentencespace"></span> When you first log into your system you will automatically be placed in your home directory by default.<span class="intersentencespace"></span> With this knowledge, you can use the <code>pwd</code> command (<a href="basics_fragment.html#sec-basics-pwd" class="hyperref">Section <span class="ref">1.2</span></a>) to get the path of your home directory.</p>
+<div class="codelisting" id="code-basics-home-pwd" data-tralics-id="uid1" data-number="1.1"><div class="heading"><span class="number">Listing 1.1:</span> <span class="description"><span class="tt">$ pwd</span></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>/Users/markbates
+</pre></div></div></div><p>Your home directory will be where your settings files get stored and where your desktop is kept.<span class="intersentencespace"></span> The home directory (or subdirectories under your home directory) is also where you will save documents and files that are yours and not to be shared with others.</p>
+<p>By default, your home directory will be unreadable and inaccessible to all other users apart from yourself (and root).<span class="intersentencespace"></span> You can change these permissions, if you want, but I would recommend against making such a change.</p>
+<p>It is quite common to see a tilde (<code>~</code>) in place of the full path for a home directory.<span class="intersentencespace"></span> The <code>~</code> will expand to be the path of your home directory when you use commands such as <code>cd</code> (<a href="basics_fragment.html#sec-basics-cd" class="hyperref">Section <span class="ref">1.5</span></a>).</p>
+</div><div id="sec-basics-pwd" data-tralics-id="cid3" class="section" data-number="1.2"><h2><a href="basics_fragment.html#sec-basics-pwd" class="heading hyperref"><span class="number">1.2 </span>Present Working Directory (<code>pwd</code>)</a></h2>
+<p>Understanding where you are at any given time in your file system is important.<span class="intersentencespace"></span> This information can help you build paths to other files or help you if you get lost.<span class="intersentencespace"></span> To find out where you are you can use the <code>pwd</code> command.</p>
+<div class="code"><div class="highlight"><pre>$ pwd
+</pre></div></div>
+<div class="codelisting" id="code-basics-pwd" data-tralics-id="uid2" data-number="1.2"><div class="heading"><span class="number">Listing 1.2</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>/Users/markbates/development/unix_commands
+</pre></div></div></div><p>In <a href="basics_fragment.html#code-basics-pwd" class="hyperref">Listing <span class="ref">1.2</span></a> you can see the directory I’m currently working in.<span class="intersentencespace"></span> For me, it’s the directory that I’m writing this book in.</p>
+<p>By default, <code>pwd</code> will list the “logical” path of your current directory.<span class="intersentencespace"></span> This means it will treat symlinked paths (see <a href="basics_fragment.html#sec-basics-ln-s" class="hyperref">Section <span class="ref">1.4.3</span></a>) as if they were the actual paths.<span class="intersentencespace"></span> For example, my <code>development</code> directory doesn’t exist under my home folder, <code>/Users/markbates</code>; instead it is symlinked to a folder inside of <code>/Users/markbates/Dropbox</code>.</p>
+<p>If we want to see the actual physical path, with all of the symlinks resolved, we can use the <code>-P</code> flag.</p>
+<div class="code"><div class="highlight"><pre>$ pwd -P
+</pre></div></div>
+<div class="codelisting" id="code-basics-pwd-p" data-tralics-id="uid3" data-number="1.3"><div class="heading"><span class="number">Listing 1.3</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>/Users/markbates/Dropbox/development/unix_commands
+</pre></div></div></div><p><a href="basics_fragment.html#code-basics-pwd-p" class="hyperref">Listing <span class="ref">1.3</span></a> shows the actual full path to my current working directory.</p>
+</div><div id="sec-basics-ls" data-tralics-id="cid4" class="section" data-number="1.3"><h2><a href="basics_fragment.html#sec-basics-ls" class="heading hyperref"><span class="number">1.3 </span>List Files and Directories (<code>ls</code>)</a></h2>
+<p>Often it is useful to be able to see what files or directories are in your current directory, or another directory.<span class="intersentencespace"></span> To accomplish this we can use the <code>ls</code> command.</p>
+<div class="code"><div class="highlight"><pre>$ ls
+</pre></div></div>
+<div class="codelisting" id="code-basics-ls-basics" data-tralics-id="uid4" data-number="1.4"><div class="heading"><span class="number">Listing 1.4</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>Applications    Calibre Library Desktop         Documents       Downloads
+Dropbox         Library         Movies          Music           Pictures
+Public          Sites           development     screencasts     scripts
+tmp
+</pre></div></div></div><p><a href="basics_fragment.html#code-basics-ls-basics" class="hyperref">Listing <span class="ref">1.4</span></a> shows the list of folders and files in my current directory, which for me would be my home directory, <code>/Users/markbates</code>.<span class="intersentencespace"></span> I will be using my home directory for all of the examples in this section, unless otherwise noted.</p>
+<div id="uid5" data-tralics-id="uid5" class="subsection" data-number="1.3.1"><h3><a href="basics_fragment.html#uid5" class="heading hyperref"><span class="number">1.3.1 </span>Listing a Different Directory</a></h3>
+<p>By default, <code>ls</code> will operate in the current directory that you’re in.<span class="intersentencespace"></span> However, you may want to find out what files are in another directory, without first leaving your current directory.<span class="intersentencespace"></span> The <code>ls</code> command will let you pass it a path to work on.</p>
+<div class="code"><div class="highlight"><pre>$ ls /usr/local/
+</pre></div></div>
+<div class="codelisting" id="code-basics-ls-alt-dir" data-tralics-id="uid6" data-number="1.5"><div class="heading"><span class="number">Listing 1.5</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>CONTRIBUTING.md Cellar          Frameworks      Library         README.md
+SUPPORTERS.md   bin             etc             foreman         go
+heroku          include         lib             opt             sbin
+share           texlive         var
+</pre></div></div></div><p><a href="basics_fragment.html#code-basics-ls-alt-dir" class="hyperref">Listing <span class="ref">1.5</span></a> shows the files and directories inside of the <code>/usr/local</code> directory, without having to leave the current directory that I am in.</p>
+</div>
+<div id="uid7" data-tralics-id="uid7" class="subsection" data-number="1.3.2"><h3><a href="basics_fragment.html#uid7" class="heading hyperref"><span class="number">1.3.2 </span>Listing All Files (<code>-a</code>)</a></h3>
+<p>So far we have seen all of the “visible” files and directories listed, however, it is common on Unix and Linux based machines to have “invisible”, or “hidden”, files that are prefixed with a “<code>.</code>” (dot).</p>
+<p>Using the <code>-a</code> flag we can see both “visible” and “hidden” files and directories.</p>
+<div class="code"><div class="highlight"><pre>$ ls -a
+</pre></div></div>
+<div class="codelisting" id="code-basics-ls-a" data-tralics-id="uid8" data-number="1.6"><div class="heading"><span class="number">Listing 1.6</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>.                   .Trash              .bashrc             .ctags
+.el4r               .erlang.cookie      .go                 .mplayer
+.psql_history       .rvm                .swt                .zshrc
+Dropbox             Sites               ..                  .Xauthority
+.cache              .cups               .el4rrc.rb          .gem
+.guard_history      .netrc              .railsrc            .rvmrc
+.vim                Applications        Library             development
+.CFUserTextEncoding .adobe              .cisco              .dbshell
+.emacs              .gemrc              .gvimrc             .node-gyp
+.redis-commander    .scala_history      .viminfo            Calibre Library
+Movies              screencasts         .DS_Store           .anyconnect
+.cloud66            .dropbox            .emacs.d            .git-completion.sh
+.heroku             .npm                .rediscli_history   .softcover
+.vimrc              Desktop             Music               scripts
+.MakeMKV            .bash_history       .codeintel          .dvdcss
+.ember              .gitconfig          .inkscape-etc       .pry_history
+.rnd                .ssh                .z                  Documents
+Pictures            tmp                 .NERDTreeBookmarks  .bash_profile
+.config             .editedhistory      .ember-data         .gnome2
+.irb-history        .pryrc              .rspec              .subversion
+.zlogin             Downloads           Public
+</pre></div></div></div><p><a href="basics_fragment.html#code-basics-ls-a" class="hyperref">Listing <span class="ref">1.6</span></a> now shows significantly more files and directories than <a href="basics_fragment.html#code-basics-ls-basics" class="hyperref">Listing <span class="ref">1.4</span></a> because the <code>-a</code> flag is including all of the “hidden” files, as well as the “visible” ones.</p>
+</div>
+<div id="sec-basics-ls-l" data-tralics-id="uid9" class="subsection" data-number="1.3.3"><h3><a href="basics_fragment.html#sec-basics-ls-l" class="heading hyperref"><span class="number">1.3.3 </span>Long Form Listing (<code>-l</code>)</a></h3>
+<p>So far in the section, whenever we have used the <code>ls</code> command, we have been given back a list of names, arranged in a column.<span class="intersentencespace"></span> One of the most useful flags for <code>ls</code> is the <code>-l</code> flag that will list out the names of the files and directories as well as give more detailed information about them.</p>
+<div class="code"><div class="highlight"><pre>$ ls -l
+</pre></div></div>
+<div class="codelisting" id="code-basics-ls-l" data-tralics-id="uid10" data-number="1.7"><div class="heading"><span class="number">Listing 1.7</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>drwxr-xr-x   16 markbates  staff   544 Aug 19 13:58 Applications
+drwxr-xr-x    5 markbates  staff   170 Dec  6 16:20 Calibre Library
+lrwxr-xr-x    1 markbates  staff    33 Jul 26  2012 Desktop -&gt;
+  /Users/markbates/Dropbox/Desktop/
+lrwxr-xr-x    1 markbates  staff    35 Jul 26  2012 Documents -&gt;
+  /Users/markbates/Dropbox/Documents/
+drwx------+ 140 markbates  staff  4760 Dec 16 13:44 Downloads
+drwx------@  24 markbates  staff   816 Dec 15 17:24 Dropbox
+drwx------@  66 markbates  staff  2244 Oct 23 08:29 Library
+drwx------+   5 markbates  staff   170 Sep 15 18:06 Movies
+drwx------+   6 markbates  staff   204 Mar  5  2013 Music
+drwx------+  10 markbates  staff   340 Jul 31 18:20 Pictures
+drwxr-xr-x+   4 markbates  staff   136 Mar  5  2013 Public
+drwxr-xr-x+   3 markbates  staff   102 Mar  5  2013 Sites
+lrwxr-xr-x    1 markbates  staff    37 Jul 26  2012 development -&gt;
+  /Users/markbates/Dropbox/development/
+lrwxr-xr-x    1 markbates  staff    37 Jun  1  2013 screencasts -&gt;
+  /Users/markbates/Dropbox/screencasts/
+lrwxr-xr-x    1 markbates  staff    33 Jul 26  2012 scripts -&gt;
+  /Users/markbates/Dropbox/scripts/
+drwxr-xr-x   19 markbates  staff   646 Dec  6 16:07 tmp
+</pre></div></div></div><p>In <a href="basics_fragment.html#code-basics-ls-l" class="hyperref">Listing <span class="ref">1.7</span></a> we see a significant amount of information being presented to us for each file and directory.</p>
+<p>If the <code>-l</code> option is given, the following information is displayed for each file: file mode, number of links, owner name, group name, number of bytes in the file, abbreviated month, day-of-month file was last modified, hour file last modified, minute file last modified, and the pathname.<span class="intersentencespace"></span> We can also see that some paths are followed by <code>-&gt;</code> and another path.<span class="intersentencespace"></span> These paths are symlinked to the directories that follow the <code>-&gt;</code>.<span class="intersentencespace"></span> See <a href="basics_fragment.html#sec-basics-ln-s" class="hyperref">Section <span class="ref">1.4.3</span></a> for more information on symbolic links.</p>
+</div>
+<div id="uid11" data-tralics-id="uid11" class="subsection" data-number="1.3.4"><h3><a href="basics_fragment.html#uid11" class="heading hyperref"><span class="number">1.3.4 </span>Human Readable Sizes (<code>-h</code>)</a></h3>
+<p>In <a href="basics_fragment.html#sec-basics-ls-l" class="hyperref">Section <span class="ref">1.3.3</span></a> we used the <code>-l</code> flag to give us a more detailed view of files and directories in our current directory, including the number of bytes in the file.</p>
+<p>While knowing the number of bytes can be useful, I find it more useful to see the size of the file in human readable terms, such as <code>1.7K</code> or <code>35M</code>.<span class="intersentencespace"></span> Thankfully <code>ls</code> will give us this information if we use the <code>-h</code> flag.</p>
+<div class="code"><div class="highlight"><pre>$ ls -lh
+</pre></div></div>
+<div class="codelisting" id="code-basics-ls-lh" data-tralics-id="uid12" data-number="1.8"><div class="heading"><span class="number">Listing 1.8</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>drwxr-xr-x   16 markbates  staff   544B Aug 19 13:58 Applications
+drwxr-xr-x    5 markbates  staff   170B Dec  6 16:20 Calibre Library
+lrwxr-xr-x    1 markbates  staff    33B Jul 26  2012 Desktop -&gt;
+  /Users/markbates/Dropbox/Desktop/
+lrwxr-xr-x    1 markbates  staff    35B Jul 26  2012 Documents -&gt;
+  /Users/markbates/Dropbox/Documents/
+drwx------+ 140 markbates  staff   4.6K Dec 16 13:44 Downloads
+drwx------@  24 markbates  staff   816B Dec 15 17:24 Dropbox
+drwx------@  66 markbates  staff   2.2K Oct 23 08:29 Library
+drwx------+   5 markbates  staff   170B Sep 15 18:06 Movies
+drwx------+   6 markbates  staff   204B Mar  5  2013 Music
+drwx------+  10 markbates  staff   340B Jul 31 18:20 Pictures
+drwxr-xr-x+   4 markbates  staff   136B Mar  5  2013 Public
+drwxr-xr-x+   3 markbates  staff   102B Mar  5  2013 Sites
+lrwxr-xr-x    1 markbates  staff    37B Jul 26  2012 development -&gt;
+  /Users/markbates/Dropbox/development/
+lrwxr-xr-x    1 markbates  staff    37B Jun  1  2013 screencasts -&gt;
+  /Users/markbates/Dropbox/screencasts/
+lrwxr-xr-x    1 markbates  staff    33B Jul 26  2012 scripts -&gt;
+  /Users/markbates/Dropbox/scripts/
+drwxr-xr-x   19 markbates  staff   646B Dec  6 16:07 tmp
+</pre></div></div></div><p>In <a href="basics_fragment.html#code-basics-ls-lh" class="hyperref">Listing <span class="ref">1.8</span></a> we see we now have an easier to understand description of the size of the files in the directory.</p>
+</div>
+<div id="sec-basics-ls-s" data-tralics-id="uid13" class="subsection" data-number="1.3.5"><h3><a href="basics_fragment.html#sec-basics-ls-s" class="heading hyperref"><span class="number">1.3.5 </span>Sorting by Size (<code>-S</code>)</a></h3>
+<p>Another useful flag we can use with <code>ls</code> is <code>-S</code>, which will sort the results of <code>ls</code> by file size, instead of the default sorting by name.</p>
+<div class="code"><div class="highlight"><pre>$ ls -lhS
+</pre></div></div>
+<div class="codelisting" id="code-basics-ls-lhs" data-tralics-id="uid14" data-number="1.9"><div class="heading"><span class="number">Listing 1.9</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>drwx------+ 140 markbates  staff   4.6K Dec 16 13:44 Downloads
+drwx------@  66 markbates  staff   2.2K Oct 23 08:29 Library
+drwx------@  24 markbates  staff   816B Dec 15 17:24 Dropbox
+drwxr-xr-x   19 markbates  staff   646B Dec  6 16:07 tmp
+drwxr-xr-x   16 markbates  staff   544B Aug 19 13:58 Applications
+drwx------+  10 markbates  staff   340B Jul 31 18:20 Pictures
+drwx------+   6 markbates  staff   204B Mar  5  2013 Music
+drwxr-xr-x    5 markbates  staff   170B Dec  6 16:20 Calibre Library
+drwx------+   5 markbates  staff   170B Sep 15 18:06 Movies
+drwxr-xr-x+   4 markbates  staff   136B Mar  5  2013 Public
+drwxr-xr-x+   3 markbates  staff   102B Mar  5  2013 Sites
+lrwxr-xr-x    1 markbates  staff    37B Jul 26  2012 development -&gt;
+  /Users/markbates/Dropbox/development/
+lrwxr-xr-x    1 markbates  staff    37B Jun  1  2013 screencasts -&gt;
+  /Users/markbates/Dropbox/screencasts/
+lrwxr-xr-x    1 markbates  staff    35B Jul 26  2012 Documents -&gt;
+  /Users/markbates/Dropbox/Documents/
+lrwxr-xr-x    1 markbates  staff    33B Jul 26  2012 Desktop -&gt;
+  /Users/markbates/Dropbox/Desktop/
+lrwxr-xr-x    1 markbates  staff    33B Jul 26  2012 scripts -&gt;
+  /Users/markbates/Dropbox/scripts/
+</pre></div></div></div><p>In <a href="basics_fragment.html#code-basics-ls-lhs" class="hyperref">Listing <span class="ref">1.9</span></a> the results of <code>ls</code> are displayed with the largest files at the top, and the smallest files at the bottom.</p>
+</div>
+<div id="sec-basics-ls-t" data-tralics-id="uid15" class="subsection" data-number="1.3.6"><h3><a href="basics_fragment.html#sec-basics-ls-t" class="heading hyperref"><span class="number">1.3.6 </span>Sorting by Last Modified Time (<code>-t</code>)</a></h3>
+<p>It can often be useful to be able to sort your <code>ls</code> results by the last time the files were modified.<span class="intersentencespace"></span> To do this we can use the <code>-t</code> flag.</p>
+<div class="code"><div class="highlight"><pre>$ ls -lt
+</pre></div></div>
+<div class="codelisting" id="code-basics-ls-lt" data-tralics-id="uid16" data-number="1.10"><div class="heading"><span class="number">Listing 1.10</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>drwx------+ 140 markbates  staff  4760 Dec 16 13:44 Downloads
+drwx------@  24 markbates  staff   816 Dec 15 17:24 Dropbox
+drwxr-xr-x    5 markbates  staff   170 Dec  6 16:20 Calibre Library
+drwxr-xr-x   19 markbates  staff   646 Dec  6 16:07 tmp
+drwx------@  66 markbates  staff  2244 Oct 23 08:29 Library
+drwx------+   5 markbates  staff   170 Sep 15 18:06 Movies
+drwxr-xr-x   16 markbates  staff   544 Aug 19 13:58 Applications
+drwx------+  10 markbates  staff   340 Jul 31 18:20 Pictures
+lrwxr-xr-x    1 markbates  staff    37 Jun  1  2013 screencasts -&gt;
+  /Users/markbates/Dropbox/screencasts/
+drwx------+   6 markbates  staff   204 Mar  5  2013 Music
+drwxr-xr-x+   4 markbates  staff   136 Mar  5  2013 Public
+drwxr-xr-x+   3 markbates  staff   102 Mar  5  2013 Sites
+lrwxr-xr-x    1 markbates  staff    33 Jul 26  2012 scripts -&gt;
+  /Users/markbates/Dropbox/scripts/
+lrwxr-xr-x    1 markbates  staff    35 Jul 26  2012 Documents -&gt;
+  /Users/markbates/Dropbox/Documents/
+lrwxr-xr-x    1 markbates  staff    33 Jul 26  2012 Desktop -&gt;
+  /Users/markbates/Dropbox/Desktop/
+lrwxr-xr-x    1 markbates  staff    37 Jul 26  2012 development -&gt;
+  /Users/markbates/Dropbox/development/
+</pre></div></div></div></div>
+<div id="uid17" data-tralics-id="uid17" class="subsection" data-number="1.3.7"><h3><a href="basics_fragment.html#uid17" class="heading hyperref"><span class="number">1.3.7 </span>Reverse Sort (<code>-r</code>)</a></h3>
+<p>When you are listing a directory that contains many files, sorting with <code>ls</code> is a great way to help quickly find the files or directories you are looking for.<span class="intersentencespace"></span> By default, <code>ls</code> sorts all of its results alphabetically.<span class="intersentencespace"></span> We also learned how to sort results by size (<a href="basics_fragment.html#sec-basics-ls-s" class="hyperref">Section <span class="ref">1.3.5</span></a>) and by last modified time (<a href="basics_fragment.html#sec-basics-ls-t" class="hyperref">Section <span class="ref">1.3.6</span></a>).</p>
+<p>Using the <code>-r</code> flag we are able to reverse the results of <code>ls</code>.</p>
+<div class="code"><div class="highlight"><pre>$ ls -lr
+</pre></div></div>
+<div class="codelisting" id="code-basics-ls-lahsr" data-tralics-id="uid18" data-number="1.11"><div class="heading"><span class="number">Listing 1.11</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>drwxr-xr-x   19 markbates  staff   646 Dec  6 16:07 tmp
+lrwxr-xr-x    1 markbates  staff    33 Jul 26  2012 scripts -&gt;
+  /Users/markbates/Dropbox/scripts/
+lrwxr-xr-x    1 markbates  staff    37 Jun  1  2013 screencasts -&gt;
+  /Users/markbates/Dropbox/screencasts/
+lrwxr-xr-x    1 markbates  staff    37 Jul 26  2012 development -&gt;
+  /Users/markbates/Dropbox/development/
+drwxr-xr-x+   3 markbates  staff   102 Mar  5  2013 Sites
+drwxr-xr-x+   4 markbates  staff   136 Mar  5  2013 Public
+drwx------+  10 markbates  staff   340 Jul 31 18:20 Pictures
+drwx------+   6 markbates  staff   204 Mar  5  2013 Music
+drwx------+   5 markbates  staff   170 Sep 15 18:06 Movies
+drwx------@  66 markbates  staff  2244 Oct 23 08:29 Library
+drwx------@  24 markbates  staff   816 Dec 15 17:24 Dropbox
+drwx------+ 140 markbates  staff  4760 Dec 16 13:44 Downloads
+lrwxr-xr-x    1 markbates  staff    35 Jul 26  2012 Documents -&gt;
+  /Users/markbates/Dropbox/Documents/
+lrwxr-xr-x    1 markbates  staff    33 Jul 26  2012 Desktop -&gt;
+  /Users/markbates/Dropbox/Desktop/
+drwxr-xr-x    5 markbates  staff   170 Dec  6 16:20 Calibre Library
+drwxr-xr-x   16 markbates  staff   544 Aug 19 13:58 Applications
+</pre></div></div></div><p>In <a href="basics_fragment.html#code-basics-ls-lahsr" class="hyperref">Listing <span class="ref">1.11</span></a> we can see that default sort of <code>ls</code>, alphabetically, has now been reversed with <code>tmp</code> at the top of the list, and <code>Applications</code> at the bottom.</p>
+<p>We can also use the <code>-r</code> flag with other options to reverse their sort order.<span class="intersentencespace"></span> For example, <code>ls -lSr</code> will list the files by size with smaller files listed first.</p>
+</div></div><div id="sec-basics-ln" data-tralics-id="cid5" class="section" data-number="1.4"><h2><a href="basics_fragment.html#sec-basics-ln" class="heading hyperref"><span class="number">1.4 </span>Links (<code>ln</code>)</a></h2>
+<p>Links allow us to create an association from one file or directory to another.<span class="intersentencespace"></span> A link allows us to “point” one file or directory to another.<span class="intersentencespace"></span> This can be quite useful for maintaining a sane file system, or for having multiple versions of a file or directory, and not wanting to use disk space to store copies of those files.</p>
+<p>An example of where links can come in handy is when deploying a web application.<span class="intersentencespace"></span> Let’s say when you deploy your application you create a new directory whose name is the current time, and you put your application code into that directory.<span class="intersentencespace"></span> After your code is there, you would have to edit your web server configuration to tell it to point to the new directory where your latest code is.<span class="intersentencespace"></span> However, using links you can create a link called “current” that your web server points at, and you can change where the “current” link points to - in this case the last timestamped folder you created for your code.</p>
+<p>Links can either be “hard” or “symbolic” as we’ll see in the following sections.</p>
+<div id="sec-basics-ln-hard" data-tralics-id="uid19" class="subsection" data-number="1.4.1"><h3><a href="basics_fragment.html#sec-basics-ln-hard" class="heading hyperref"><span class="number">1.4.1 </span>Hard Links</a></h3>
+<p>We can use the <code>ln</code> command to create a link between two files.<span class="intersentencespace"></span> By default, the <code>ln</code> command will create a hard link between these files.</p>
+<p>Hard links create an identical copy of the linked file on disk, that gets updated automatically as the source file gets updated.<span class="intersentencespace"></span> That means if the content of the source is changed, so will the target file.</p>
+<p>To create a link to a file, we call the <code>ln</code> command - first giving it the name of the file we want to link to (our source file), followed by the name of the linked file we want to create (the target).</p>
+<div class="code"><div class="highlight"><pre>$ ln a.txt b.txt
+</pre></div></div>
+<div class="codelisting" id="code-basics-ln-hard" data-tralics-id="uid20" data-number="1.12"><div class="heading"><span class="number">Listing 1.12:</span> <span class="description"><span class="tt">$ ls -l</span></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>-rw-r--r--  2 markbates  staff  12 Dec 17 16:46 a.txt
+-rw-r--r--  2 markbates  staff  12 Dec 17 16:46 b.txt
+</pre></div></div></div><p><a href="basics_fragment.html#code-basics-ln-hard" class="hyperref">Listing <span class="ref">1.12</span></a> shows the newly created <code>b.txt</code> has all of the same properties as the <code>a.txt</code> file.</p>
+<p>An important thing to note about hard links is that they only work on the current file system.<span class="intersentencespace"></span> You can not create a hard link to a file on a different file system.<span class="intersentencespace"></span> To do that you need to use symbolic links, <a href="basics_fragment.html#sec-basics-ln-s" class="hyperref">Section <span class="ref">1.4.3</span></a>.</p>
+<p>While the content of the source and target files are linked, if the source file gets deleted, the target file will continue to live as an independent file, despite the severed link.</p>
+<div class="code"><div class="highlight"><pre>$ rm a.txt
+</pre></div></div>
+<div class="codelisting" id="code-basics-ln-rm-a" data-tralics-id="uid21" data-number="1.13"><div class="heading"><span class="number">Listing 1.13:</span> <span class="description"><span class="tt">$ ls -l</span></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>-rw-r--r--  1 markbates  staff  12 Dec 17 17:01 b.txt
+</pre></div></div></div><p>In <a href="basics_fragment.html#code-basics-ln-rm-a" class="hyperref">Listing <span class="ref">1.13</span></a> we can see that the <code>b.txt</code> file still exists, despite the target file having been deleted.</p>
+<p>If we were to use the <code>cat</code> tool from <a href="extras_fragment.html#chapter-extras" class="hyperref">Chapter <span class="ref">9</span></a> <a href="extras_fragment.html#sec-extras-cat" class="hyperref">Section <span class="ref">9.2</span></a>, we can see that the contents of <code>b.txt</code> are still intact.</p>
+<div class="code"><div class="highlight"><pre>$ cat b.txt
+</pre></div></div>
+<div class="codelisting" id="code-basics-ln-cat-b" data-tralics-id="uid22" data-number="1.14"><div class="heading"><span class="number">Listing 1.14</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>Hello World
+</pre></div></div></div></div>
+<div id="uid23" data-tralics-id="uid23" class="subsection" data-number="1.4.2"><h3><a href="basics_fragment.html#uid23" class="heading hyperref"><span class="number">1.4.2 </span>Forcing a Link (<code>-f</code>)</a></h3>
+<p>If the source file already exists you will get an error, like that in <a href="basics_fragment.html#code-basics-ln-error" class="hyperref">Listing <span class="ref">1.15</span></a>.</p>
+<div class="code"><div class="highlight"><pre>$ ln a.txt b.txt
+</pre></div></div>
+<div class="codelisting" id="code-basics-ln-error" data-tralics-id="uid24" data-number="1.15"><div class="heading"><span class="number">Listing 1.15</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>ln: b.txt: File exists
+</pre></div></div></div><p>To fix the error in <a href="basics_fragment.html#code-basics-ln-error" class="hyperref">Listing <span class="ref">1.15</span></a> you can pass the <code>-f</code> flag to force the link.</p>
+<div class="code"><div class="highlight"><pre>$ ln -f a.txt b.txt
+</pre></div></div>
+</div>
+<div id="sec-basics-ln-s" data-tralics-id="uid25" class="subsection" data-number="1.4.3"><h3><a href="basics_fragment.html#sec-basics-ln-s" class="heading hyperref"><span class="number">1.4.3 </span>Symbolic Links (<code>-s</code>)</a></h3>
+<p>We have seen that the default type of link that gets created when using <code>ln</code> is that of a hard link.<span class="intersentencespace"></span> Unfortunately hard links do not work for directories.<span class="intersentencespace"></span> To create a link to a directory, we can use the <code>-s</code> flag to create a symbolic link.<span class="intersentencespace"></span> This can also be used for linking to files as well, not just directories.</p>
+<p>Symbolic links can also link to files or directories on other file systems.<span class="intersentencespace"></span> This makes symbolic links (symlinks) more powerful, and more common than the default hard links.</p>
+<p>To create a symbolic link we can use the <code>-s</code> flag.</p>
+<div class="code"><div class="highlight"><pre>$ ln -s a.txt b.txt
+</pre></div></div>
+<div class="codelisting" id="code-basics-ln-s" data-tralics-id="uid26" data-number="1.16"><div class="heading"><span class="number">Listing 1.16:</span> <span class="description"><span class="tt">$ ls -l</span></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>-rw-r--r--  1 markbates  staff  12 Dec 17 17:01 a.txt
+lrwxr-xr-x  1 markbates  staff   5 Dec 17 17:12 b.txt -&gt; a.txt
+</pre></div></div></div><p>As <a href="basics_fragment.html#code-basics-ln-s" class="hyperref">Listing <span class="ref">1.16</span></a> shows we have created a symbolic link from <code>a.txt</code> to <code>b.txt</code>.<span class="intersentencespace"></span> See <a href="basics_fragment.html#sec-basics-ls-l" class="hyperref">Section <span class="ref">1.3.3</span></a> for an explanation of how to read <a href="basics_fragment.html#code-basics-ln-s" class="hyperref">Listing <span class="ref">1.16</span></a>.</p>
+<p><a href="basics_fragment.html#code-basics-ln-hard-a" class="hyperref">Listing <span class="ref">1.17</span></a> shows the results of creating a hard link, and <a href="basics_fragment.html#code-basics-ln-s-a" class="hyperref">Listing <span class="ref">1.18</span></a> shows the results of a symbolic link.</p>
+<div class="codelisting" id="code-basics-ln-hard-a" data-tralics-id="uid27" data-number="1.17"><div class="heading"><span class="number">Listing 1.17:</span> <span class="description"><span class="tt">$ ln a.txt b.txt</span></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>-rw-r--r--  2 markbates  staff  12 Dec 17 16:46 a.txt
+-rw-r--r--  2 markbates  staff  12 Dec 17 16:46 b.txt
+</pre></div></div></div><div class="codelisting" id="code-basics-ln-s-a" data-tralics-id="uid28" data-number="1.18"><div class="heading"><span class="number">Listing 1.18:</span> <span class="description"><span class="tt">$ ln -s a.txt b.txt</span></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>-rw-r--r--  1 markbates  staff  12 Dec 17 17:01 a.txt
+lrwxr-xr-x  1 markbates  staff   5 Dec 17 17:12 b.txt -&gt; a.txt
+</pre></div></div></div><p>Notice that the file timestamps and size are identical in <a href="basics_fragment.html#code-basics-ln-hard-a" class="hyperref">Listing <span class="ref">1.17</span></a> with the hard link, but they are different in <a href="basics_fragment.html#code-basics-ln-s-a" class="hyperref">Listing <span class="ref">1.18</span></a> for the symbolic link.<span class="intersentencespace"></span> The reason for the difference is that with the symbolic link the operating system creates a new, small file that points to the target file or directory.</p>
+</div></div><div id="sec-basics-cd" data-tralics-id="cid6" class="section" data-number="1.5"><h2><a href="basics_fragment.html#sec-basics-cd" class="heading hyperref"><span class="number">1.5 </span>Change Directories (<code>cd</code>)</a></h2>
+<p>While staying in the same directory all of the time might seem like fun, eventually you’ll need to change, or navigate, into another directory.<span class="intersentencespace"></span> To do this we can use the very simple <code>cd</code> command.</p>
+<p><code>cd</code> takes one argument - the path to the directory you wish to navigate to.</p>
+<div class="code"><div class="highlight"><pre>$ cd ~/Documents
+</pre></div></div>
+<div class="codelisting" id="code-basics-cd" data-tralics-id="uid29" data-number="1.19"><div class="heading"><span class="number">Listing 1.19:</span> <span class="description"><span class="tt">$ pwd</span></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>/Users/markbates/Documents
+</pre></div></div></div><p>In <a href="basics_fragment.html#code-basics-cd" class="hyperref">Listing <span class="ref">1.19</span></a> I have successfully navigated to my <code>Documents</code> directory, and we can use the <code>pwd</code> command (<a href="basics_fragment.html#sec-basics-pwd" class="hyperref">Section <span class="ref">1.2</span></a>) to prove it.</p>
+<div id="uid30" data-tralics-id="uid30" class="subsection" data-number="1.5.1"><h3><a href="basics_fragment.html#uid30" class="heading hyperref"><span class="number">1.5.1 </span>Navigating Up (<code>..</code>)</a></h3>
+<p>Once inside of a directory, it can be useful to be able to navigate back up a directory.<span class="intersentencespace"></span> One way to do this would be to call <code>cd</code> giving it the full path to the directory you want to go.<span class="intersentencespace"></span> Another way to accomplish the task of moving up to the parent directory is to use the special path <code>..</code>.</p>
+<div class="code"><div class="highlight"><pre>$ cd ..
+</pre></div></div>
+<p>Telling <code>cd</code> to navigate to <code>..</code> will cause it to navigate to the parent directory of the current directory.</p>
+</div>
+<div id="uid31" data-tralics-id="uid31" class="subsection" data-number="1.5.2"><h3><a href="basics_fragment.html#uid31" class="heading hyperref"><span class="number">1.5.2 </span>Navigating to the Home Directory</a></h3>
+<p>When you are in a directory and want to navigate back to your home directory, you can call <code>cd</code> without any arguments.</p>
+<div class="code"><div class="highlight"><pre>$ cd
+</pre></div></div>
+<div class="codelisting" id="code-basics-cd-home" data-tralics-id="uid32" data-number="1.20"><div class="heading"><span class="number">Listing 1.20:</span> <span class="description"><span class="tt">$ pwd</span></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>$ /Users/markbates
+</pre></div></div></div></div></div><div id="cid7" data-tralics-id="cid7" class="section" data-number="1.6"><h2><a href="basics_fragment.html#cid7" class="heading hyperref"><span class="number">1.6 </span>Creating Directories (<code>mkdir</code>)</a></h2>
+<p>Directories are a great place to store and organize files, and creating them is easy.<span class="intersentencespace"></span> To create a directory we can use the <code>mkdir</code> command followed by the name of the directory we wish to create.</p>
+<div class="code"><div class="highlight"><pre>$ mkdir foo
+</pre></div></div>
+<div class="codelisting" id="code-basics-mkdir-foo" data-tralics-id="uid33" data-number="1.21"><div class="heading"><span class="number">Listing 1.21:</span> <span class="description"><span class="tt">$ ls -l</span></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>drwxr-xr-x  2 markbates  staff  68 Dec 18 13:20 foo
+</pre></div></div></div>
+<div id="uid34" data-tralics-id="uid34" class="subsection" data-number="1.6.1"><h3><a href="basics_fragment.html#uid34" class="heading hyperref"><span class="number">1.6.1 </span>Create Intermediate Directories (<code>-p</code>)</a></h3>
+<p>The <code>mkdir</code> command will allow us to create nested directories using the <code>-p</code> flag.</p>
+<div class="code"><div class="highlight"><pre>$ mkdir -p a/b/c
+</pre></div></div>
+<div class="codelisting" id="code-basics-mkdir-p" data-tralics-id="uid35" data-number="1.22"><div class="heading"><span class="number">Listing 1.22:</span> <span class="description"><span class="tt">$ ls -la a/b/c</span></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>drwxr-xr-x  2 markbates  staff   68 Dec 18 13:23 .
+drwxr-xr-x  3 markbates  staff  102 Dec 18 13:23 ..
+</pre></div></div></div><p>In <a href="basics_fragment.html#code-basics-mkdir-p" class="hyperref">Listing <span class="ref">1.22</span></a> we can use the <code>ls</code> command (<a href="basics_fragment.html#sec-basics-ls" class="hyperref">Section <span class="ref">1.3</span></a>) to see that the <code>c</code> directory exists and is currently empty.</p>
+</div>
+<div id="uid36" data-tralics-id="uid36" class="subsection" data-number="1.6.2"><h3><a href="basics_fragment.html#uid36" class="heading hyperref"><span class="number">1.6.2 </span>Verbose Output (<code>-v</code>)</a></h3>
+<p>The <code>mkdir</code> command supports a verbose mode flag, <code>-v</code>.<span class="intersentencespace"></span> Adding the <code>-v</code> flag will print the results of <code>mkdir</code> to the console.</p>
+<div class="code"><div class="highlight"><pre>$ mkdir -v a
+</pre></div></div>
+<div class="codelisting" id="code-basics-mkdir-v" data-tralics-id="uid37" data-number="1.23"><div class="heading"><span class="number">Listing 1.23</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>mkdir: created directory 'a'
+</pre></div></div></div><p>Using the <code>-v</code> flag can provide useful reporting when writing scripts that will execute a lot of commands for you.</p>
+</div></div><div id="sec-basics-cp" data-tralics-id="cid8" class="section" data-number="1.7"><h2><a href="basics_fragment.html#sec-basics-cp" class="heading hyperref"><span class="number">1.7 </span>Copying Files (<code>cp</code>)</a></h2>
+<p>Copying files and directories can be accomplished using the <code>cp</code> command.</p>
+<div id="uid38" data-tralics-id="uid38" class="subsection" data-number="1.7.1"><h3><a href="basics_fragment.html#uid38" class="heading hyperref"><span class="number">1.7.1 </span>Copying a Single File</a></h3>
+<p>To copy a single file we can call the <code>cp</code> command with two arguments.<span class="intersentencespace"></span> The first argument is the file we want to copy, the source file.<span class="intersentencespace"></span> The second argument, or target, is the location we want to copy the source file to.<span class="intersentencespace"></span> This target can either be the name of the file you wish to copy to, or the directory you wish to copy to.<span class="intersentencespace"></span> If you specify just a directory then the original file name of the source file will be used to create the new file in the target directory.</p>
+<div class="code"><div class="highlight"><pre>$ cp a.txt b.txt
+</pre></div></div>
+<div class="codelisting" id="code-basics-cp-basic" data-tralics-id="uid39" data-number="1.24"><div class="heading"><span class="number">Listing 1.24:</span> <span class="description"><span class="tt">$ ls -l</span></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>-rw-r--r--  1 markbates  staff  0 Dec 18 13:34 a.txt
+-rw-r--r--  1 markbates  staff  0 Dec 18 13:41 b.txt
+</pre></div></div></div></div>
+<div id="uid40" data-tralics-id="uid40" class="subsection" data-number="1.7.2"><h3><a href="basics_fragment.html#uid40" class="heading hyperref"><span class="number">1.7.2 </span>Copying Multiple Files</a></h3>
+<p><code>cp</code> will allows you to list several files you would like to copy.<span class="intersentencespace"></span> When you do this, however, the last argument <em>must</em> be a directory, and the original file names of the source files will be used as the names of the new files in the target directory.</p>
+<div class="code"><div class="highlight"><pre>$ cp a.txt b.txt foo
+</pre></div></div>
+<div class="codelisting" id="code-basics-cp-multi-1" data-tralics-id="uid41" data-number="1.25"><div class="heading"><span class="number">Listing 1.25:</span> <span class="description"><span class="tt">$ ls -l foo</span></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>-rw-r--r--  1 markbates  staff  0 Dec 18 13:47 a.txt
+-rw-r--r--  1 markbates  staff  0 Dec 18 13:47 b.txt
+</pre></div></div></div><p>We can also pass simple patterns to <code>cp</code> to achieve the same results as <a href="basics_fragment.html#code-basics-cp-multi-1" class="hyperref">Listing <span class="ref">1.25</span></a>.</p>
+<div class="code"><div class="highlight"><pre>$ cp *.txt foo
+</pre></div></div>
+<div class="codelisting" id="code-basics-cp-multi-2" data-tralics-id="uid42" data-number="1.26"><div class="heading"><span class="number">Listing 1.26:</span> <span class="description"><span class="tt">$ ls -l foo</span></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>-rw-r--r--  1 markbates  staff  0 Dec 18 13:47 a.txt
+-rw-r--r--  1 markbates  staff  0 Dec 18 13:47 b.txt
+</pre></div></div></div></div>
+<div id="uid43" data-tralics-id="uid43" class="subsection" data-number="1.7.3"><h3><a href="basics_fragment.html#uid43" class="heading hyperref"><span class="number">1.7.3 </span>Verbose Output (<code>-v</code>)</a></h3>
+<p>The <code>cp</code> command will print verbose output regarding the files that were copied using the <code>-v</code> flag.</p>
+<div class="code"><div class="highlight"><pre>$ cp -v a.txt b.txt
+</pre></div></div>
+<div class="codelisting" id="code-basics-cp-v" data-tralics-id="uid44" data-number="1.27"><div class="heading"><span class="number">Listing 1.27</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>a.txt -&gt; b.txt
+</pre></div></div></div></div>
+<div id="uid45" data-tralics-id="uid45" class="subsection" data-number="1.7.4"><h3><a href="basics_fragment.html#uid45" class="heading hyperref"><span class="number">1.7.4 </span>Copying Directories (<code>-R</code>)</a></h3>
+<p>By default <code>cp</code> expects the source to be copied to be a file.<span class="intersentencespace"></span> If we try to copy a directory to another directory we will get the error we see in <a href="basics_fragment.html#code-basics-cp-bad-dir" class="hyperref">Listing <span class="ref">1.28</span></a>.</p>
+<div class="code"><div class="highlight"><pre>$ cp foo bar
+</pre></div></div>
+<div class="codelisting" id="code-basics-cp-bad-dir" data-tralics-id="uid46" data-number="1.28"><div class="heading"><span class="number">Listing 1.28</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>cp: foo is a directory (not copied).
+</pre></div></div></div><p>To fix the error in <a href="basics_fragment.html#code-basics-cp-bad-dir" class="hyperref">Listing <span class="ref">1.28</span></a>, we can use the <code>-R</code> flag to recursively copy the directory’s contents to the new directory.</p>
+<div class="code"><div class="highlight"><pre>$ cp -Rv foo bar
+</pre></div></div>
+<div class="codelisting" id="code-basics-cp-r" data-tralics-id="uid47" data-number="1.29"><div class="heading"><span class="number">Listing 1.29</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>foo -&gt; bar
+foo/a.txt -&gt; bar/a.txt
+foo/b.txt -&gt; bar/b.txt
+foo/c.txt -&gt; bar/c.txt
+</pre></div></div></div><p>Using the verbose flag, <code>-v</code>, we can see in <a href="basics_fragment.html#code-basics-cp-r" class="hyperref">Listing <span class="ref">1.29</span></a> all of the files from the source directory, <code>foo</code>, have been copied to the target directory, <code>bar</code>.</p>
+</div>
+<div id="sec-basics-cp-f" data-tralics-id="uid48" class="subsection" data-number="1.7.5"><h3><a href="basics_fragment.html#sec-basics-cp-f" class="heading hyperref"><span class="number">1.7.5 </span>Force Overwriting of a File (<code>-f</code>)</a></h3>
+<p>In <a href="basics_fragment.html#code-basics-cp-ls" class="hyperref">Listing <span class="ref">1.30</span></a> we can see that we have two files, <code>a.txt</code> and <code>b.txt</code>.</p>
+<div class="code"><div class="highlight"><pre>$ ls -l
+</pre></div></div>
+<div class="codelisting" id="code-basics-cp-ls" data-tralics-id="uid49" data-number="1.30"><div class="heading"><span class="number">Listing 1.30</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>-rw-r--r--  1 markbates  staff  0 Dec 18 13:58 a.txt
+-rw-r--r--  1 root       staff  6 Dec 18 14:55 b.txt
+</pre></div></div></div><p>When looking at <a href="basics_fragment.html#code-basics-cp-ls" class="hyperref">Listing <span class="ref">1.30</span></a> we can see that the two files listed are owned by two different users.<span class="intersentencespace"></span> The first file, <code>a.txt</code>, is owned by user <code>markbates</code>, while the second file is owned by <code>root</code>.</p>
+<p>What would happen if we tried to copy <code>a.txt</code> to <code>b.txt</code>?</p>
+<div class="code"><div class="highlight"><pre>$ cp a.txt b.txt
+</pre></div></div>
+<div class="codelisting" id="code-basics-cp-bad" data-tralics-id="uid50" data-number="1.31"><div class="heading"><span class="number">Listing 1.31</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>cp: b.txt: Permission denied
+</pre></div></div></div><p>As we can see in <a href="basics_fragment.html#code-basics-cp-bad" class="hyperref">Listing <span class="ref">1.31</span></a> we get an error when trying to overwrite <code>b.txt</code> with <code>a.txt</code>.<span class="intersentencespace"></span> We don’t have permission to do that.<span class="intersentencespace"></span> When errors such as this occur we can use the <code>-f</code> flag to force the copying of the source file to the target file.</p>
+<div class="code"><div class="highlight"><pre>$ cp -f a.txt b.txt
+</pre></div></div>
+<div class="codelisting" id="code-basics-cp-f-ls" data-tralics-id="uid51" data-number="1.32"><div class="heading"><span class="number">Listing 1.32:</span> <span class="description"><span class="tt">$ ls -l</span></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>-rw-r--r--  1 markbates  staff  0 Dec 18 13:58 a.txt
+-rw-r--r--  1 markbates  staff  0 Dec 18 14:57 b.txt
+</pre></div></div></div><p><a href="basics_fragment.html#code-basics-cp-f-ls" class="hyperref">Listing <span class="ref">1.32</span></a> shows that by using the <code>-f</code> flag we were able to successfully overwrite the target file, <code>b.txt</code>, with the contents of the source file, <code>a.txt</code>.</p>
+</div>
+<div id="sec-basics-cp-i" data-tralics-id="uid52" class="subsection" data-number="1.7.6"><h3><a href="basics_fragment.html#sec-basics-cp-i" class="heading hyperref"><span class="number">1.7.6 </span>Confirm Overwriting of a File (<code>-i</code>)</a></h3>
+<p>When you are about to copy over several files at once, and some of the target files already exist, it may be beneficial to confirm that you do in fact want to copy the source file and replace the target file.</p>
+<p><code>cp</code> will happily prompt you to confirm that you are about to overwrite another file if you use the <code>-i</code> flag.</p>
+<div class="code"><div class="highlight"><pre>$ cp -i a.txt b.txt
+</pre></div></div>
+<div class="codelisting" id="code-basics-cp-i" data-tralics-id="uid53" data-number="1.33"><div class="heading"><span class="number">Listing 1.33</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>overwrite b.txt? (y/n [n])
+</pre></div></div></div><p>In <a href="basics_fragment.html#code-basics-cp-i" class="hyperref">Listing <span class="ref">1.33</span></a> we are presented with a prompt asking us to confirm, <code>y</code> or <code>n</code>, whether to overwrite the target file.<span class="intersentencespace"></span> A response of <code>y</code> will overwrite the file.<span class="intersentencespace"></span> A response of <code>n</code> will skip the file and move on to the next copy, if there is one.</p>
+</div></div><div id="cid9" data-tralics-id="cid9" class="section" data-number="1.8"><h2><a href="basics_fragment.html#cid9" class="heading hyperref"><span class="number">1.8 </span>Deleting Files (<code>rm</code>)</a></h2>
+<p>The <code>rm</code> command is used to delete files and folders.<span class="intersentencespace"></span> It supports the same flags and arguments as the <code>cp</code> command that we learned about in <a href="basics_fragment.html#sec-basics-cp" class="hyperref">Section <span class="ref">1.7</span></a>.</p>
+<div class="code"><div class="highlight"><pre>$ rm -v a.txt
+</pre></div></div>
+<div class="codelisting" id="code-basics-rm" data-tralics-id="uid54" data-number="1.34"><div class="heading"><span class="number">Listing 1.34</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>a.txt
+</pre></div></div></div><p><a href="basics_fragment.html#code-basics-rm" class="hyperref">Listing <span class="ref">1.34</span></a> uses the <code>-v</code> flag to list files that were deleted using the <code>rm</code> command.</p>
+</div><div id="cid10" data-tralics-id="cid10" class="section" data-number="1.9"><h2><a href="basics_fragment.html#cid10" class="heading hyperref"><span class="number">1.9 </span>Moving Files (<code>mv</code>)</a></h2>
+<p>The process for moving files is almost identical to that of copying files, which we learned about in <a href="basics_fragment.html#sec-basics-cp" class="hyperref">Section <span class="ref">1.7</span></a>.</p>
+<p><code>mv</code> supports the same flags as <code>cp</code>.<span class="intersentencespace"></span> In reality the <code>mv</code> command is really just a combination of <code>cp</code> and <code>rm</code> to achieve the desired outcome of moving a file from one location to another.</p>
+<div class="code"><div class="highlight"><pre>$ mv -v a.txt b.txt
+</pre></div></div>
+<div class="codelisting" id="code-basics-mv-v" data-tralics-id="uid55" data-number="1.35"><div class="heading"><span class="number">Listing 1.35</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>a.txt -&gt; b.txt
+</pre></div></div></div><p>We can achieve the same effect from <a href="basics_fragment.html#code-basics-mv-v" class="hyperref">Listing <span class="ref">1.35</span></a> by using the <code>cp</code> and <code>rm</code> commands.<span class="intersentencespace"></span> This can be useful when trying to move a file across file systems, as the <code>mv</code> command doesn’t support that.</p>
+<div class="code"><div class="highlight"><pre>$ cp a.txt b.txt
+$ rm a.txt
+</pre></div></div>
+<div class="codelisting" id="code-basics-mv-cp-rm" data-tralics-id="uid56" data-number="1.36"><div class="heading"><span class="number">Listing 1.36:</span> <span class="description"><span class="tt">$ ls -l</span></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>-rw-r--r--  1 markbates  staff  0 Dec 18 16:20 b.txt
+</pre></div></div></div><p><a href="basics_fragment.html#code-basics-mv-cp-rm" class="hyperref">Listing <span class="ref">1.36</span></a> shows that we were able to replicate the behavior of <code>mv</code> using the <code>cp</code> and <code>rm</code> commands.</p>
+</div><div id="cid11" data-tralics-id="cid11" class="section" data-number="1.10"><h2><a href="basics_fragment.html#cid11" class="heading hyperref"><span class="number">1.10 </span>Input/Output (<code>|</code>, <code>&gt;</code>)</a></h2>
+<p>The Unix philosophy, which you’ll hear repeated often, is “do one thing, and do it well”.<span class="intersentencespace"></span> This theme is evident as we move through this book.<span class="intersentencespace"></span> Each command covered does one thing, and does it well.</p>
+<div id="uid57" data-tralics-id="uid57" class="subsection" data-number="1.10.1"><h3><a href="basics_fragment.html#uid57" class="heading hyperref"><span class="number">1.10.1 </span>Redirecting Output (<code>|</code>)</a></h3>
+<p>With these seemingly small individual commands, we can build some pretty impressive work flows by redirecting the output of one command to the input to another command.<span class="intersentencespace"></span> This is made possible by using the “pipe” operator, <code>|</code>.</p>
+<p>In the following example, we “pipe” the output of the <code>ls</code> command to the input of the <code>grep</code> command to find all the files in my home directory that contain an underscore, <code>_</code>.</p>
+<div class="code"><div class="highlight"><pre>$ ls -a ~ | grep _
+</pre></div></div>
+<div class="codelisting" id="code-basics-pipe-grep" data-tralics-id="uid58" data-number="1.37"><div class="heading"><span class="number">Listing 1.37</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>.DS_Store
+.bash_history
+.bash_profile
+.guard_history
+.pry_history
+.psql_history
+.rediscli_history
+.scala_history
+</pre></div></div></div><p>When using the <code>|</code> operator we can chain together any number of commands.<span class="intersentencespace"></span> For example, we can take the output of <a href="basics_fragment.html#code-basics-pipe-grep" class="hyperref">Listing <span class="ref">1.37</span></a> and pass it to the <code>sed</code> command from <a href="sed_fragment.html#chapter-sed" class="hyperref">Chapter <span class="ref">7</span></a> and change all of the underscores to dashes.</p>
+<div class="code"><div class="highlight"><pre>$ ls -a ~ | grep _ | sed "s/_/-/g"
+</pre></div></div>
+<div class="codelisting" id="code-basics-pipe-multi" data-tralics-id="uid59" data-number="1.38"><div class="heading"><span class="number">Listing 1.38</span> <span class="description"></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>.DS-Store
+.bash-history
+.bash-profile
+.guard-history
+.pry-history
+.psql-history
+.rediscli-history
+.scala-history
+</pre></div></div></div><p><a href="basics_fragment.html#code-basics-pipe-multi" class="hyperref">Listing <span class="ref">1.38</span></a> shows the result of chaining together the <code>ls</code>, <code>grep</code>, and <code>sed</code> commands using the <code>|</code> operator.</p>
+</div>
+<div id="sec-basics-file-writing" data-tralics-id="uid60" class="subsection" data-number="1.10.2"><h3><a href="basics_fragment.html#sec-basics-file-writing" class="heading hyperref"><span class="number">1.10.2 </span>Writing to a File (<code>&gt;</code>)</a></h3>
+<p>In addition to redirecting the output from one process and sending it to another process, we can also write that output to a file using the <code>&gt;</code> operator.</p>
+<div class="code"><div class="highlight"><pre>$ ls -a ~ | grep _ &gt; underscores.txt
+</pre></div></div>
+<div class="codelisting" id="code-basics-pipe-write-file" data-tralics-id="uid61" data-number="1.39"><div class="heading"><span class="number">Listing 1.39:</span> <span class="description"><span class="tt">$ cat underscores.txt</span></span>
+
+
+</div>
+
+<div class="code"><div class="highlight"><pre>.DS_Store
+.bash_history
+.bash_profile
+.guard_history
+.pry_history
+.psql_history
+.rediscli_history
+.scala_history
+</pre></div></div></div><p><a href="basics_fragment.html#code-basics-pipe-write-file" class="hyperref">Listing <span class="ref">1.39</span></a> shows the contents of the <code>underscores.txt</code> file (using <code>cat</code> from <a href="extras_fragment.html#chapter-extras" class="hyperref">Chapter <span class="ref">9</span></a> <a href="extras_fragment.html#sec-extras-cat" class="hyperref">Section <span class="ref">9.2</span></a>), which contains the results of our search for files in the home directory that contain underscores.</p>
+</div>
+<div id="sec-basics-file-reading" data-tralics-id="uid62" class="subsection" data-number="1.10.3"><h3><a href="basics_fragment.html#sec-basics-file-reading" class="heading hyperref"><span class="number">1.10.3 </span>Reading from a File (<code>&lt;</code>)</a></h3>
+<p>In <a href="basics_fragment.html#sec-basics-file-writing" class="hyperref">Section <span class="ref">1.10.2</span></a> we saw that we can use <code>&gt;</code> to write data to a file.<span class="intersentencespace"></span> If we instead wanted to read data from a file, we can use <code>&lt;</code>.</p>
+<p>In <a href="extras_fragment.html#chapter-extras" class="hyperref">Chapter <span class="ref">9</span></a>, <a href="extras_fragment.html#sec-extras-pbpaste" class="hyperref">Section <span class="ref">9.6</span></a>, we see a great example of this using the <code>pbpaste</code> command.</p>
+</div></div><div id="cid12" data-tralics-id="cid12" class="section" data-number="1.11"><h2><a href="basics_fragment.html#cid12" class="heading hyperref"><span class="number">1.11 </span>Conclusion</a></h2>
+<p>In this chapter we covered the basics of the command line, from how to navigate between directories, to how to move, delete, or copy files, and more.</p>
+<p>Hopefully this chapter has provided you with the solid footing that you’ll need to conquer the command line.<span class="intersentencespace"></span> The commands in this chapter will become second nature to you over time, as you’ll use them continuously each day.</p>
+</div>W5��      ^��^��A��n^���  ^    a,:https://softcover.s3-us-west-2.amazonaws.com/8/unix_commands/html/basics_fragment.html?X-Amz-Expires=432000&X-Amz-Date=20200511T171228Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJMNNDDBSYVXVHGAA/20200511/us-west-2/s3/aws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=6b582b3a6f0427e178b0497944eab8d895912de8470a2bb6e27edf4d2b0b59ea necko:classified 1 strongly-framed 1 security-info FnhllAKWRHGAlo+ESXykKAAAAAAAAAAAwAAAAAAAAEaphjojH6pBabDSgSnsfLHeAAAAAgAAAAAAAAAAAAAAAAAAAAEANAFmCjImkVxP+7sgiYWmMt8FvcOXmlQiTNWFiWlrbpbqgwAAAAAAAAgsMIIIKDCCBxCgAwIBAgIQC5Q5DoK0dXL+s+m/eW4cvjANBgkqhkiG9w0BAQsFADBkMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3d3cuZGlnaWNlcnQuY29tMSMwIQYDVQQDExpEaWdpQ2VydCBCYWx0aW1vcmUgQ0EtMiBHMjAeFw0xOTExMDkwMDAwMDBaFw0yMDEyMTAxMjAwMDBaMHYxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpXYXNoaW5ndG9uMRAwDgYDVQQHEwdTZWF0dGxlMRkwFwYDVQQKExBBbWF6b24uY29tLCBJbmMuMSUwIwYDVQQDDBwqLnMzLXVzLXdlc3QtMi5hbWF6b25hd3MuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoIPmoxt0wxt+KDlawWSlUCv+5ZSsQzdGvbmzTF1DJY7x66TjBjgUVmAHrAffSk9tjaavTB9C0gwDRduKm0dtc3ZRrPE5xtQTGbC11fohzplaO4jDo4zJgr/XdwFervuxIuocoSFDBoNybLB3vvuaqUlSOzJEVOu32bEH4578WIMJDuH5llA2J4k355YjFYbaABUCNYESRfsOfQDmHVKQk33cYIbCGuPbTBooL5Pf4w3pJXRceehKORBc8kcl11LmC9Itx/Xwd8gN4QgW0SuMbqctaNeXNZvmZRKSRZsebeFB3kG1hJB0DKE47sYXHAIj4ymGDoXg+mGaI2l5qi22eQIDAQABo4IEwjCCBL4wHwYDVR0jBBgwFoAUwBKyKHRoRmfpcCV0GgBFWwZ9XEQwHQYDVR0OBBYEFAKqrgVLKHKXsDQXdFSzcUeAHviyMIIB6QYDVR0RBIIB4DCCAdyCGnMzLXVzLXdlc3QtMi5hbWF6b25hd3MuY29tghwqLnMzLXVzLXdlc3QtMi5hbWF6b25hd3MuY29tghpzMy51cy13ZXN0LTIuYW1hem9uYXdzLmNvbYIcKi5zMy51cy13ZXN0LTIuYW1hem9uYXdzLmNvbYIkczMuZHVhbHN0YWNrLnVzLXdlc3QtMi5hbWF6b25hd3MuY29tgiYqLnMzLmR1YWxzdGFjay51cy13ZXN0LTIuYW1hem9uYXdzLmNvbYISKi5zMy5hbWF6b25hd3MuY29tgiQqLnMzLWNvbnRyb2wudXMtd2VzdC0yLmFtYXpvbmF3cy5jb22CInMzLWNvbnRyb2wudXMtd2VzdC0yLmFtYXpvbmF3cy5jb22CLiouczMtY29udHJvbC5kdWFsc3RhY2sudXMtd2VzdC0yLmFtYXpvbmF3cy5jb22CLHMzLWNvbnRyb2wuZHVhbHN0YWNrLnVzLXdlc3QtMi5hbWF6b25hd3MuY29tgigqLnMzLWFjY2Vzc3BvaW50LnVzLXdlc3QtMi5hbWF6b25hd3MuY29tgjIqLnMzLWFjY2Vzc3BvaW50LmR1YWxzdGFjay51cy13ZXN0LTIuYW1hem9uYXdzLmNvbTAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMIGBBgNVHR8EejB4MDqgOKA2hjRodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vRGlnaUNlcnRCYWx0aW1vcmVDQS0yRzIuY3JsMDqgOKA2hjRodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGlnaUNlcnRCYWx0aW1vcmVDQS0yRzIuY3JsMEwGA1UdIARFMEMwNwYJYIZIAYb9bAEBMCowKAYIKwYBBQUHAgEWHGh0dHBzOi8vd3d3LmRpZ2ljZXJ0LmNvbS9DUFMwCAYGZ4EMAQICMHkGCCsGAQUFBwEBBG0wazAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29tMEMGCCsGAQUFBzAChjdodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNlcnRCYWx0aW1vcmVDQS0yRzIuY3J0MAwGA1UdEwEB/wQCMAAwggEDBgorBgEEAdZ5AgQCBIH0BIHxAO8AdgCkuQmQtBhYFIe7E6LMZ3AKPDWYBPkb37jjd80OyA3cEAAAAW5Ng4m/AAAEAwBHMEUCIQDKHR+4+sNDXX+GpAyxF1OkxhFYEo1vrmmusDKZWKHSMgIgc69zk4EGs9jo0rpcxz7J2FqzuCgB3TbCGtD+F9548uUAdQBep3P531bA57U2SH3QSeAyepGaDIShEhKEGHWWgXFFWAAAAW5Ng4k2AAAEAwBGMEQCIHW19y7ac4juTYIVAKeh72RsfSilIT+SE0DA1gv0bDwYAiADaswu0x9UzXHNpeWJcOhDLz9GGFB4OL/vbv2rv0QWNDANBgkqhkiG9w0BAQsFAAOCAQEAThGGbv7JTQTLav1K5uhYqZnmEvKNzILQ+06Zs4QwtFvumRD5KYqGENuYavw8KkECnS5DsvJx4yfwBcAbFP2QIIW/NnjQciCaVxT+hgkvpJ5b94EcNZZ/F7Ru1XMEWfI0Y82nvcq72ICJLPkQO9w9mytz8R4gagv2zGNwlGsmbdbq9RO1Q2wty/KvgXAL02bHaR5TMn+/AQ/YluedfhfQ/89AetnuQsZq+syb4yVfmubfGQRlhuWB7MoRRK+ve/wj5bHlrz/MNvqy4+JMzxO8nY+lOaGe1iHowfrgYnmU5Vn+0haxBUKuVjMnw0zLN8zopj2tx0VgG/ZF1dMV+6jIYcAvAAMAAAAAAQEAAAAAAAAEUDI1NgAAABBSU0EtUEtDUzEtU0hBMjU2AANmCjImkVxP+7sgiYWmMt8FvcOXmlQiTNWFiWlrbpbqgwAAAAAAAAgsMIIIKDCCBxCgAwIBAgIQC5Q5DoK0dXL+s+m/eW4cvjANBgkqhkiG9w0BAQsFADBkMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3d3cuZGlnaWNlcnQuY29tMSMwIQYDVQQDExpEaWdpQ2VydCBCYWx0aW1vcmUgQ0EtMiBHMjAeFw0xOTExMDkwMDAwMDBaFw0yMDEyMTAxMjAwMDBaMHYxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpXYXNoaW5ndG9uMRAwDgYDVQQHEwdTZWF0dGxlMRkwFwYDVQQKExBBbWF6b24uY29tLCBJbmMuMSUwIwYDVQQDDBwqLnMzLXVzLXdlc3QtMi5hbWF6b25hd3MuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoIPmoxt0wxt+KDlawWSlUCv+5ZSsQzdGvbmzTF1DJY7x66TjBjgUVmAHrAffSk9tjaavTB9C0gwDRduKm0dtc3ZRrPE5xtQTGbC11fohzplaO4jDo4zJgr/XdwFervuxIuocoSFDBoNybLB3vvuaqUlSOzJEVOu32bEH4578WIMJDuH5llA2J4k355YjFYbaABUCNYESRfsOfQDmHVKQk33cYIbCGuPbTBooL5Pf4w3pJXRceehKORBc8kcl11LmC9Itx/Xwd8gN4QgW0SuMbqctaNeXNZvmZRKSRZsebeFB3kG1hJB0DKE47sYXHAIj4ymGDoXg+mGaI2l5qi22eQIDAQABo4IEwjCCBL4wHwYDVR0jBBgwFoAUwBKyKHRoRmfpcCV0GgBFWwZ9XEQwHQYDVR0OBBYEFAKqrgVLKHKXsDQXdFSzcUeAHviyMIIB6QYDVR0RBIIB4DCCAdyCGnMzLXVzLXdlc3QtMi5hbWF6b25hd3MuY29tghwqLnMzLXVzLXdlc3QtMi5hbWF6b25hd3MuY29tghpzMy51cy13ZXN0LTIuYW1hem9uYXdzLmNvbYIcKi5zMy51cy13ZXN0LTIuYW1hem9uYXdzLmNvbYIkczMuZHVhbHN0YWNrLnVzLXdlc3QtMi5hbWF6b25hd3MuY29tgiYqLnMzLmR1YWxzdGFjay51cy13ZXN0LTIuYW1hem9uYXdzLmNvbYISKi5zMy5hbWF6b25hd3MuY29tgiQqLnMzLWNvbnRyb2wudXMtd2VzdC0yLmFtYXpvbmF3cy5jb22CInMzLWNvbnRyb2wudXMtd2VzdC0yLmFtYXpvbmF3cy5jb22CLiouczMtY29udHJvbC5kdWFsc3RhY2sudXMtd2VzdC0yLmFtYXpvbmF3cy5jb22CLHMzLWNvbnRyb2wuZHVhbHN0YWNrLnVzLXdlc3QtMi5hbWF6b25hd3MuY29tgigqLnMzLWFjY2Vzc3BvaW50LnVzLXdlc3QtMi5hbWF6b25hd3MuY29tgjIqLnMzLWFjY2Vzc3BvaW50LmR1YWxzdGFjay51cy13ZXN0LTIuYW1hem9uYXdzLmNvbTAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMIGBBgNVHR8EejB4MDqgOKA2hjRodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vRGlnaUNlcnRCYWx0aW1vcmVDQS0yRzIuY3JsMDqgOKA2hjRodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGln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 request-method GET request-Origin http://conqueringthecommandline.com response-head HTTP/1.1 200 OK
+x-amz-id-2: Uke2TL7CVJrSRKNqDPuzCtsUJz1ywwblmxihQ/UlNn/TJsauwSNxKAnupw2ekbgeE8r8EZ0Dm20=
+x-amz-request-id: 54041B72B5BD479E
+Date: Mon, 11 May 2020 17:12:31 GMT
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET
+Access-Control-Max-Age: 3000
+Vary: Origin, Access-Control-Request-Headers, Access-Control-Request-Method
+Last-Modified: Tue, 01 Apr 2014 19:49:13 GMT
+ETag: "c6b172c249768add7b32fef48a18cc79"
+Accept-Ranges: bytes
+Content-Type: text/html
+Content-Length: 60035
+Server: AmazonS3
+ original-response-headers x-amz-id-2: Uke2TL7CVJrSRKNqDPuzCtsUJz1ywwblmxihQ/UlNn/TJsauwSNxKAnupw2ekbgeE8r8EZ0Dm20=
+x-amz-request-id: 54041B72B5BD479E
+Date: Mon, 11 May 2020 17:12:31 GMT
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET
+Access-Control-Max-Age: 3000
+Vary: Origin, Access-Control-Request-Headers, Access-Control-Request-Method
+Last-Modified: Tue, 01 Apr 2014 19:49:13 GMT
+ETag: "c6b172c249768add7b32fef48a18cc79"
+Accept-Ranges: bytes
+Content-Type: text/html
+Content-Length: 60035
+Server: AmazonS3
+ ctid 1 uncompressed-len 0 net-response-time-onstart 341 net-response-time-onstop 435   �

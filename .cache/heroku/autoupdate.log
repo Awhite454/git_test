@@ -1,0 +1,67 @@
+[2020-04-04T03:24:05.164Z] starting `/usr/local/lib/heroku/bin/heroku update --autoupdate` from /usr/local/lib/heroku/bin/run version
+waiting until 2020-04-04T04:24:05.154Z to update
+waiting until 2020-04-04T04:24:56.379Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+waiting until 2020-04-04T04:26:00.946Z to update
+time to update
+heroku: Updating CLI... already on latest version: 7.39.2
+Updating completions...
+Updating completions... done

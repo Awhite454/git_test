@@ -1,0 +1,15 @@
+> git check-ignore -v -z --stdin
+> git show :README.md
+> git ls-files --stage -- /home/alec10/odin_on_rails/my_first_rails_app/README.md
+> git cat-file -s 7db80e4ca1bf849701dce58a63f09a102cb9f931
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :README.md
+> git ls-files --stage -- /home/alec10/odin_on_rails/my_first_rails_app/README.md
+> git cat-file -s 7db80e4ca1bf849701dce58a63f09a102cb9f931

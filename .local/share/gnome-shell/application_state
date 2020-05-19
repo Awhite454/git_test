@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<application-state>
+  <context id="">
+    <application id="code.desktop" open-window-count="1" score="18" last-seen="1589660313"/>
+    <application id="org.gnome.baobab.desktop" open-window-count="0" score="2" last-seen="1589660049"/>
+    <application id="org.gnome.Terminal.desktop" open-window-count="1" score="3" last-seen="1589660170"/>
+    <application id="firefox.desktop" open-window-count="1" score="30" last-seen="1589660316"/>
+  </context>
+</application-state>
